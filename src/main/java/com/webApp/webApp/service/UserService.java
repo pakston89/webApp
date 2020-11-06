@@ -1,0 +1,48 @@
+package com.webApp.webApp.service;
+import com.webApp.webApp.repository.UserRepository;
+import com.webApp.webApp.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import java.util.List;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private RestTemplate restTemp;
+    @Autowired
+	private UserRepository userRepository;
+
+    public List<User> getUsers(){
+        return userRepository.findAll();
+    }
+
+    public ResponseEntity<User[]> getUserOut(String userId){
+        String url = String.format("https://jsonplaceholder.typicode.com/posts?userId=%s", userId);
+        ResponseEntity<User[]> respuesta = restTemp.getForEntity(url, User[].class);
+        System.out.println(respuesta);
+        User[] users = respuesta.getBody();
+
+        return respuesta;     
+    }
+    public User getUser(Integer userId){
+        User user = userRepository.findByUserId(userId);
+        return user;
+    }
+
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Integer userId) {
+        userRepository.delete(userRepository.findByUserId(userId));
+        userRepository.flush();
+    }
+
+    public void updateUser(User user) {
+        User userModel = userRepository.findByUserId(user.getUserId());
+        userRepository.saveAndFlush(userModel);
+    }
+}
