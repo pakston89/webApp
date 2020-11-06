@@ -24,22 +24,22 @@ public class UserController {
         return userService.getUserOut(userId);
     }
 
-    @GetMapping("getUserByIdIn")
+    @GetMapping("/getUserByIdIn")
     public User getUser(@RequestParam Integer userId){
         return userService.getUser(userId);
     }
 
-    @PostMapping("addUser")
+    @PostMapping("/addUserIn")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 
-    @DeleteMapping("deleteUser")
+    @DeleteMapping("/deleteUserIn")
     public void deleteUser(@RequestParam Integer userId) {
         userService.deleteUser(userId);
     }
 
-    @PutMapping("updateUser")
+    @PutMapping("/updateUserIn")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
