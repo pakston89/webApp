@@ -7,26 +7,19 @@ import javax.persistence.*;
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_KEY")
 	private Integer idKey;
+	@Column(name = "USER_ID")
 	private Integer userId;
+	@Column(name = "USER_NAME")
 	private String userName;
+	@Column(name = "USER_LAST_NAME")
 	private String userLastName;
+	@Column(name = "USER_NIF")
 	private String userNif;
+	@Column(name = "REGISTRATION_DATE")
 	private String registrationDate;
-
-	public User(){
-		super();
-	}
-
-	public User(Integer userId, String userName, String userLastName, String userNif, String registrationDate) {
-
-		this.userId = userId;
-		this.userName = userName;
-		this.userLastName = userLastName;
-		this.userNif = userNif;
-		this.registrationDate = registrationDate;
-	}
 
 	public Integer getUserId() {
 		return userId;

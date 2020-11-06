@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,10 +23,15 @@ public class UserService {
 
     public ResponseEntity<User[]> getUserOut(String userId){
         String url = String.format("https://jsonplaceholder.typicode.com/posts?userId=%s", userId);
-        ResponseEntity<User[]> respuesta = restTemp.getForEntity(url, User[].class);
-        User[] users = respuesta.getBody();
-
-        return respuesta;     
+        ResponseEntity<User[]> respuesta = null;
+        try{
+            respuesta = restTemp.getForEntity(url, User[].class);
+            User[] users = respuesta.getBody();
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido un error en la comunicación");
+        }
+        return respuesta;
     }
     public User getUser(Integer userId){
         if (userId > 0){
