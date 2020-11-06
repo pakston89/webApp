@@ -22,14 +22,17 @@ public class UserService {
     public ResponseEntity<User[]> getUserOut(String userId){
         String url = String.format("https://jsonplaceholder.typicode.com/posts?userId=%s", userId);
         ResponseEntity<User[]> respuesta = restTemp.getForEntity(url, User[].class);
-        System.out.println(respuesta);
         User[] users = respuesta.getBody();
 
         return respuesta;     
     }
     public User getUser(Integer userId){
-        User user = userRepository.findByUserId(userId);
-        return user;
+        if (userId > 0){
+            return userRepository.findByUserId(userId);
+        }
+        else{
+            return null;
+        }
     }
 
     public void addUser(User user) {
