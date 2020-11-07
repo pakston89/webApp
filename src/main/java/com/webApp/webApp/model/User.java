@@ -21,6 +21,23 @@ public class User {
 	@Column(name = "REGISTRATION_DATE")
 	private String registrationDate;
 
+	public User(){
+
+	}
+
+	public User(Integer idKey, Integer userId, String userName, String userLastName, String userNif, String registrationDate) {
+		this.idKey = idKey;
+		this.userId = userId;
+		this.userName = userName;
+		this.userLastName = userLastName;
+		this.userNif = userNif;
+		this.registrationDate = registrationDate;
+	}
+
+	public Integer getIdKey() {
+		return idKey;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
