@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -52,7 +51,11 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-        User userModel = userRepository.findByUserId(user.getUserId());
-        userRepository.saveAndFlush(userModel);
+        User userToUpdate = userRepository.findByUserId(user.getUserId());
+        userToUpdate.setUserName(user.getUserName());
+        userToUpdate.setUserLastName(user.getUserLastName());
+        userToUpdate.setUserNif(user.getUserNif());
+        userToUpdate.setRegistrationDate(user.getRegistrationDate());
+        userRepository.saveAndFlush(userToUpdate);
     }
 }
