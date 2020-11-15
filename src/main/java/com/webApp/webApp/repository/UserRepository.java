@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByUserId(@Param("userId") Integer userId);
+    User findByUserNif(@Param("userNif") String userNif);
 }
 
 

@@ -1,4 +1,5 @@
 package com.webApp.webApp.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserByIdOut")
-    public ResponseEntity<User[]> getUserOut(@RequestParam String userId){
+    public ResponseEntity<User> getUserOut(@RequestParam String userId){
         return userService.getUserOut(userId);
     }
 
@@ -44,8 +45,8 @@ public class UserController {
         userService.updateUser(user);
     }
 
-    @PatchMapping
-    public void updateSomethingAboutMyUser(@RequestBody User user) {
-        //
+    @PatchMapping("/updateUserName")
+    public void updateUserName(@RequestBody User user) {
+        userService.updateUserName(user);
     }
 }

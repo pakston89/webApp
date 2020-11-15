@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -20,15 +19,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public ResponseEntity<User[]> getUserOut(String userId){
-        String url = String.format("https://jsonplaceholder.typicode.com/posts?userId=%s", userId);
-        ResponseEntity<User[]> respuesta = null;
+    public ResponseEntity<User> getUserOut(String userId){
+        String url = String.format("http://localhost:5000/getUserByIdIn?userId=%s", userId);
+        ResponseEntity<User> respuesta = null;
         try{
-            respuesta = restTemp.getForEntity(url, User[].class);
-            User[] users = respuesta.getBody();
+            respuesta = restTemp.getForEntity(url, User.class);
+            User user = respuesta.getBody();
         }
         catch(Exception e){
-            System.out.println("Se ha producido un error en la comunicación");
+            System.out.println("Se ha producido un error en la comunicación: " + e);
         }
         return respuesta;
     }
@@ -56,6 +55,12 @@ public class UserService {
         userToUpdate.setUserLastName(user.getUserLastName());
         userToUpdate.setUserNif(user.getUserNif());
         userToUpdate.setRegistrationDate(user.getRegistrationDate());
+        userRepository.saveAndFlush(userToUpdate);
+    }
+
+    public void updateUserName(User user) {
+        User userToUpdate = userRepository.findByUserId(user.getUserId());
+        userToUpdate.setUserName(user.getUserName());
         userRepository.saveAndFlush(userToUpdate);
     }
 }
