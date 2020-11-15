@@ -1,6 +1,8 @@
 package com.webApp.webApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name ="users")
@@ -8,6 +10,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	@Column(name = "ID_KEY")
 	private Integer idKey;
 	@Column(name = "USER_ID")
@@ -77,5 +80,6 @@ public class User {
 	public void setRegistrationDate(String registrationDate) {
 		this.registrationDate = registrationDate;
 	}
+
 }
 
