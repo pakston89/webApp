@@ -2,6 +2,7 @@ package com.webApp.webApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -10,76 +11,63 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
-	@Column(name = "ID_KEY")
-	private Integer idKey;
-	@Column(name = "USER_ID")
-	private Integer userId;
-	@Column(name = "USER_NAME")
-	private String userName;
-	@Column(name = "USER_LAST_NAME")
-	private String userLastName;
-	@Column(name = "USER_NIF")
-	private String userNif;
-	@Column(name = "REGISTRATION_DATE")
-	private String registrationDate;
+	@Column(name = "id")
+	private Integer id;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "last_name")
+	private String lastName;
+	@Column(name = "nif")
+	private String nif;
+	@Column(name = "registration_date")
+	private LocalDate registrationDate;
 
 	public User(){
 
 	}
 
-	public User(Integer idKey, Integer userId, String userName, String userLastName, String userNif, String registrationDate) {
-		this.idKey = idKey;
-		this.userId = userId;
-		this.userName = userName;
-		this.userLastName = userLastName;
-		this.userNif = userNif;
+	public User(Integer id, String name, String lastName, String nif, LocalDate registrationDate) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.nif = nif;
 		this.registrationDate = registrationDate;
 	}
 
-	public Integer getIdKey() {
-		return idKey;
+	public Integer getId() {
+		return id;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getUserLastName() {
-		return userLastName;
+	public String getNif() {
+		return nif;
 	}
 
-	public void setUserLastName(String userLastName) {
-		this.userLastName = userLastName;
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 
-	public String getUserNif() {
-		return userNif;
-	}
-
-	public void setUserNif(String userNif) {
-		this.userNif = userNif;
-	}
-
-	public String getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(String registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-
 }
 

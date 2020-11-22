@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -19,8 +21,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public ResponseEntity<User> getUserOut(String userId){
-        String url = String.format("http://localhost:5000/getUserByIdIn?userId=%s", userId);
+    public ResponseEntity<User> getUserOut(String id){
+        String url = String.format("http://localhost:5000/getUserByIdIn?userId=%s", id);
         ResponseEntity<User> respuesta = null;
         try{
             respuesta = restTemp.getForEntity(url, User.class);
@@ -31,9 +33,9 @@ public class UserService {
         }
         return respuesta;
     }
-    public User getUser(Integer userId){
-        if (userId > 0){
-            return userRepository.findByUserId(userId);
+    public User getUser(Integer id){
+        if (id > 0){
+            return userRepository.findByID(id);
         }
         else{
             return null;
@@ -44,23 +46,23 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(Integer userId) {
-        userRepository.delete(userRepository.findByUserId(userId));
+    public void deleteUser(Integer id) {
+        userRepository.delete(userRepository.findByID(id));
         userRepository.flush();
     }
 
     public void updateUser(User user) {
-        User userToUpdate = userRepository.findByUserId(user.getUserId());
-        userToUpdate.setUserName(user.getUserName());
-        userToUpdate.setUserLastName(user.getUserLastName());
-        userToUpdate.setUserNif(user.getUserNif());
+        User userToUpdate = userRepository.findByID(user.getId());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setNif(user.getNif());
         userToUpdate.setRegistrationDate(user.getRegistrationDate());
         userRepository.saveAndFlush(userToUpdate);
     }
 
     public void updateUserName(User user) {
-        User userToUpdate = userRepository.findByUserId(user.getUserId());
-        userToUpdate.setUserName(user.getUserName());
+        User userToUpdate = userRepository.findByID(user.getId());
+        userToUpdate.setName(user.getName());
         userRepository.saveAndFlush(userToUpdate);
     }
 }

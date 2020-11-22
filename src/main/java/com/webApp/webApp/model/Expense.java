@@ -7,62 +7,52 @@ import javax.persistence.*;
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_KEY")
-    private Integer idKey;
-    @Column(name = "EXPENSE_ID")
-    private Integer expenseId;
-    @Column(name = "EXPENSE_DESCRIPTION")
-    private String expenseDescription;
-    @Column(name = "EXPENSE_AMOUNT")
-    private double expenseAmount;
-    @Column(name = "USER_ID")
-    private Integer userId;
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "amount")
+    private double amount;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Expense() {
 
     }
 
-    public Expense(Integer idKey, Integer expenseId, String expenseDescription, double expenseAmount, Integer userId) {
-        this.idKey = idKey;
-        this.expenseId = expenseId;
-        this.expenseDescription = expenseDescription;
-        this.expenseAmount = expenseAmount;
-        this.userId = userId;
+    public Expense(Integer id, String description, double amount, User user) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.user = user;
     }
 
-    public Integer getIdKey() {
-        return idKey;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getExpenseId() {
-        return expenseId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExpenseId(Integer expenseId) {
-        this.expenseId = expenseId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getExpenseDescription() {
-        return expenseDescription;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setExpenseDescription(String expenseDescription) {
-        this.expenseDescription = expenseDescription;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public double getExpenseAmount() {
-        return expenseAmount;
+    public User getUser() {
+        return user;
     }
 
-    public void setExpenseAmount(double amount) {
-        this.expenseAmount = expenseAmount;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
