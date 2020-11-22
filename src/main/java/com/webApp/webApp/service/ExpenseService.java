@@ -1,6 +1,7 @@
 package com.webApp.webApp.service;
 
 import com.webApp.webApp.model.Expense;
+import com.webApp.webApp.model.User;
 import com.webApp.webApp.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,9 @@ public class ExpenseService {
         return expenseRepository.findAll();
     }
 
-    public Expense getExpense(Integer expenseId){
-        if (expenseId > 0){
-            return expenseRepository.findByExpenseId(expenseId);
+    public Expense getExpense(Integer id){
+        if (id > 0){
+            return expenseRepository.findByID(id);
         }
         else{
             return null;
@@ -29,21 +30,22 @@ public class ExpenseService {
         expenseRepository.save(expense);
     }
 
-    public void deleteExpense(Integer expenseId) {
-        expenseRepository.delete(expenseRepository.findByExpenseId(expenseId));
+    public void deleteExpense(Integer id) {
+        expenseRepository.delete(expenseRepository.findByID(id));
         expenseRepository.flush();
     }
 
     public void updateExpense(Expense expense) {
-        Expense expenseToUpdate = expenseRepository.findByExpenseId(expense.getExpenseId());
-        expenseToUpdate.setExpenseDescription(expense.getExpenseDescription());
-        expenseToUpdate.setExpenseAmount(expense.getExpenseAmount());
+        Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
+        expenseToUpdate.setDescription(expense.getDescription());
+        expenseToUpdate.setAmount(expense.getAmount());
+        expenseToUpdate.setUser(expense.getUser());
         expenseRepository.saveAndFlush(expenseToUpdate);
     }
 
     public void updateExpenseDescription(Expense expense) {
-        Expense expenseToUpdate = expenseRepository.findByExpenseId(expense.getExpenseId());
-        expenseToUpdate.setExpenseDescription(expense.getExpenseDescription());
+        Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
+        expenseToUpdate.setDescription(expense.getDescription());
         expenseRepository.saveAndFlush(expenseToUpdate);
     }
 }

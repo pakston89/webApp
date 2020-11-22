@@ -21,13 +21,13 @@ public class UserController {
     }
 
     @GetMapping("/getUserByIdOut")
-    public ResponseEntity<User> getUserOut(@RequestParam String userId){
-        return userService.getUserOut(userId);
+    public ResponseEntity<User> getUserOut(@RequestParam String id){
+        return userService.getUserOut(id);
     }
 
     @GetMapping("/getUserByIdIn")
-    public User getUser(@RequestParam Integer userId){
-        return userService.getUser(userId);
+    public User getUser(@RequestParam Integer id){
+        return userService.getUser(id);
     }
 
     @PostMapping("/addUserIn")
@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUserIn")
-    public void deleteUser(@RequestParam Integer userId) {
-        userService.deleteUser(userId);
+    public void deleteUser(@RequestParam Integer id) {
+        userService.deleteUser(id);
     }
 
     @PutMapping("/updateUserIn")

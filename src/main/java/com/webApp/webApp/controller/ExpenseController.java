@@ -4,7 +4,6 @@ import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -20,8 +19,8 @@ public class ExpenseController {
     }
 
     @GetMapping("/getExpenseByIdIn")
-    public Expense getExpense(@RequestParam Integer expenseId){
-        return expenseService.getExpense(expenseId);
+    public Expense getExpense(@RequestParam Integer id){
+        return expenseService.getExpense(id);
     }
 
     @PostMapping("/addExpenseIn")
@@ -30,12 +29,12 @@ public class ExpenseController {
     }
 
     @DeleteMapping("/deleteExpenseIn")
-    public void deleteExpense(@RequestParam Integer expenseId) {
-        expenseService.deleteExpense(expenseId);
+    public void deleteExpense(@RequestParam Integer id) {
+        expenseService.deleteExpense(id);
     }
 
     @PutMapping("/updateExpenseIn")
-    public void updateUser(@RequestBody Expense expense) {
+    public void updateExpense(@RequestBody Expense expense) {
         expenseService.updateExpense(expense);
     }
 
