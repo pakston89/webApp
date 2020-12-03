@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT * FROM USERS WHERE id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM users WHERE id=?1", nativeQuery = true)
     User findByID(@Param("id") Integer id);
 }
 

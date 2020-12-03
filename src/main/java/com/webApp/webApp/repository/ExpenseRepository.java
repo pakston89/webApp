@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
-    @Query("SELECT e FROM Expense e WHERE e.id=?1")
+    @Query(value = "SELECT * FROM expenses WHERE id=?1", nativeQuery = true)
     Expense findByID(@Param("id") Integer Id);
 }
 
