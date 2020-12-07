@@ -1,6 +1,12 @@
 package com.webApp.webApp.model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.persistence.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @Entity
 @Table(name = "expenses")
@@ -13,6 +19,8 @@ public class Expense {
     private String description;
     @Column(name = "amount")
     private double amount;
+    @Column(name = "currency")
+    private final String currency = "EUR";
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -48,11 +56,38 @@ public class Expense {
         this.amount = amount;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Double convertAmountToEuros (Double amountToConvert, String fromCurrency){
+        String url = String.format("http://data.fixer.io/api/latest?access_key=6eb751287d171bb40c9e732ded8c71c7&symbols=%s", fromCurrency);
+        Double amountInEuros = null;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+
+        try{
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.body());
+            JsonNode rates = root.path("rates");
+            JsonNode currency = rates.get(fromCurrency);
+            Double rate = currency.asDouble();
+            System.out.println(rate.toString());
+            amountInEuros = amountToConvert / rate;
+        }
+        catch(Exception e){
+
+        }
+        return amountInEuros;
     }
 }

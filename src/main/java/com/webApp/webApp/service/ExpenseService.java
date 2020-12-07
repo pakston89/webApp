@@ -1,7 +1,6 @@
 package com.webApp.webApp.service;
 
 import com.webApp.webApp.model.Expense;
-import com.webApp.webApp.model.User;
 import com.webApp.webApp.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,8 @@ public class ExpenseService {
     }
 
     public void addExpense(Expense expense) {
+        Double amountEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
+        expense.setAmount(amountEuros);
         expenseRepository.save(expense);
     }
 
@@ -38,7 +39,7 @@ public class ExpenseService {
     public void updateExpense(Expense expense) {
         Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
         expenseToUpdate.setDescription(expense.getDescription());
-        expenseToUpdate.setAmount(expense.getAmount());
+        expenseToUpdate.setAmount(expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
         expenseToUpdate.setUser(expense.getUser());
         expenseRepository.saveAndFlush(expenseToUpdate);
     }

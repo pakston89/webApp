@@ -29,7 +29,7 @@ public class UserService {
             User user = respuesta.getBody();
         }
         catch(Exception e){
-            System.out.println("Se ha producido un error en la comunicación: " + e);
+
         }
         return respuesta;
     }
