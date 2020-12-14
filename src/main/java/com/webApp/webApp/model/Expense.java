@@ -20,7 +20,7 @@ public class Expense {
     @Column(name = "amount")
     private double amount;
     @Column(name = "currency")
-    private final String currency = "EUR";
+    private String currency;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -29,10 +29,11 @@ public class Expense {
 
     }
 
-    public Expense(Integer id, String description, double amount, User user) {
+    public Expense(Integer id, String description, double amount, String currency, User user) {
         this.id = id;
         this.description = description;
         this.amount = amount;
+        this.currency = currency;
         this.user = user;
     }
 
@@ -60,6 +61,10 @@ public class Expense {
         return currency;
     }
 
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public User getUser() {
         return user;
     }
@@ -70,7 +75,7 @@ public class Expense {
 
     public Double convertAmountToEuros (Double amountToConvert, String fromCurrency){
         String url = String.format("http://data.fixer.io/api/latest?access_key=6eb751287d171bb40c9e732ded8c71c7&symbols=%s", fromCurrency);
-        Double amountInEuros = null;
+        Double amountInEuros = 0.0;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
@@ -80,10 +85,12 @@ public class Expense {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.body());
             JsonNode rates = root.path("rates");
+            System.out.println(fromCurrency);
             JsonNode currency = rates.get(fromCurrency);
             Double rate = currency.asDouble();
             System.out.println(rate.toString());
             amountInEuros = amountToConvert / rate;
+            System.out.println(amountInEuros.toString());
         }
         catch(Exception e){
 
