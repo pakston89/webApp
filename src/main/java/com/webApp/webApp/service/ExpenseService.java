@@ -1,5 +1,6 @@
 package com.webApp.webApp.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ExpenseService {
         }
     }
 
-    public void addExpense(Expense expense) {
+    public void addExpense(Expense expense) throws JsonProcessingException {
         Double amountEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountEuros);
         expense.setCurrency("EUR");
@@ -37,7 +38,7 @@ public class ExpenseService {
         expenseRepository.flush();
     }
 
-    public void updateExpense(Expense expense) {
+    public void updateExpense(Expense expense) throws JsonProcessingException {
         Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
         expenseToUpdate.setDescription(expense.getDescription());
         expenseToUpdate.setAmount(expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
