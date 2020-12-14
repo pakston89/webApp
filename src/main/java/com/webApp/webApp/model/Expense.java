@@ -1,5 +1,6 @@
 package com.webApp.webApp.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.persistence.*;
@@ -73,23 +74,31 @@ public class Expense {
         this.user = user;
     }
 
-    public Double convertAmountToEuros (Double amountToConvert, String fromCurrency){
+    private HttpResponse<String> RequestToCurrencyExchange(String fromCurrency){
         String url = String.format("http://data.fixer.io/api/latest?access_key=6eb751287d171bb40c9e732ded8c71c7&symbols=%s", fromCurrency);
+        HttpResponse<String> response = null;
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
-        Double amountInEuros = 0.0;
 
         try{
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(response.body());
-            JsonNode rates = root.path("rates");
-            Double rate = rates.asDouble();
-            amountInEuros = amountToConvert / rate;
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         }
         catch(Exception e){
 
         }
+        return response;
+    }
+
+    public Double convertAmountToEuros(Double amountToConvert, String fromCurrency) throws JsonProcessingException {
+        Double amountInEuros = 0.0;
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(RequestToCurrencyExchange(fromCurrency).body());
+        JsonNode rates = root.path("rates");
+        JsonNode currency = rates.get(fromCurrency);
+        Double rate = currency.asDouble();
+        amountInEuros = amountToConvert / rate;
+
         return amountInEuros;
     }
 }
