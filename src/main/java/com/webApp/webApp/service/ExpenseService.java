@@ -28,6 +28,7 @@ public class ExpenseService {
     public void addExpense(Expense expense) {
         Double amountEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountEuros);
+        expense.setCurrency("EUR");
         expenseRepository.save(expense);
     }
 
