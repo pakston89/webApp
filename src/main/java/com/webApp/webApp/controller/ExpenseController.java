@@ -1,5 +1,6 @@
 package com.webApp.webApp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ExpenseController {
     }
 
     @PostMapping("/addExpenseIn")
-    public void addUser(@RequestBody Expense expense) {
+    public void addUser(@RequestBody Expense expense) throws JsonProcessingException {
         expenseService.addExpense(expense);
     }
 
@@ -34,7 +35,7 @@ public class ExpenseController {
     }
 
     @PutMapping("/updateExpenseIn")
-    public void updateExpense(@RequestBody Expense expense) {
+    public void updateExpense(@RequestBody Expense expense) throws JsonProcessingException {
         expenseService.updateExpense(expense);
     }
 

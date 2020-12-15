@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.webApp.webApp.model.User;
 import com.webApp.webApp.service.UserService;
-
 import java.util.List;
 
 @RestController
