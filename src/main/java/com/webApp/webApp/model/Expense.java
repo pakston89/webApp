@@ -104,7 +104,7 @@ public class Expense {
     }
 
     public Double convertAmountToEuros(Double amountToConvert, String fromCurrency) throws JsonProcessingException {
-        Double amountInEuros = amountToConvert / CurrencyExchangeResponseMapper (fromCurrency);
+        Double amountInEuros = Double.longBitsToDouble(Math.round(amountToConvert / CurrencyExchangeResponseMapper (fromCurrency)));
         return amountInEuros;
     }
 }
