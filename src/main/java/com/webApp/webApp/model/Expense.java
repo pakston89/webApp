@@ -89,15 +89,22 @@ public class Expense {
         return response;
     }
 
-    public Double convertAmountToEuros(Double amountToConvert, String fromCurrency) throws JsonProcessingException {
-        Double amountInEuros = 0.0;
-
+    public Double CurrencyExchangeResponseMapper (String fromCurrency){
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(RequestToCurrencyExchange(fromCurrency).body());
+        JsonNode root = null;
+        try {
+            root = mapper.readTree(RequestToCurrencyExchange(fromCurrency).body());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         JsonNode rates = root.path("rates");
         JsonNode currency = rates.get(fromCurrency);
         Double rate = currency.asDouble();
-        amountInEuros = amountToConvert / rate;
+        return rate;
+    }
+
+    public Double convertAmountToEuros(Double amountToConvert, String fromCurrency) throws JsonProcessingException {
+        Double amountInEuros = amountToConvert / CurrencyExchangeResponseMapper (fromCurrency);
 
         return amountInEuros;
     }
