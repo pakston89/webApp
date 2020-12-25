@@ -33,13 +33,17 @@ public class UserService {
         }
         return respuesta;
     }
-    public User getUser(Integer id){
+    public User getUserById(Integer id){
         if (id > 0){
             return userRepository.findByID(id);
         }
         else{
             return null;
         }
+    }
+
+    public List<User> getUserByName(String name){
+        return userRepository.findByName(name);
     }
 
     public void addUser(User user) {

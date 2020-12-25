@@ -17,7 +17,7 @@ public class ExpenseService {
         return expenseRepository.findAll();
     }
 
-    public Expense getExpense(Integer id){
+    public Expense getExpenseById(Integer id){
         if (id > 0){
             return expenseRepository.findByID(id);
         }
@@ -27,8 +27,8 @@ public class ExpenseService {
     }
 
     public void addExpense(Expense expense) throws JsonProcessingException {
-        Double amountEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
-        expense.setAmount(amountEuros);
+        Double amountInEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
+        expense.setAmount(amountInEuros);
         expense.setCurrency("EUR");
         expenseRepository.save(expense);
     }

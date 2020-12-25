@@ -19,9 +19,9 @@ public class ExpenseController {
         return expenseService.getExpenses();
     }
 
-    @GetMapping("/getExpenseByIdIn")
-    public Expense getExpense(@RequestParam Integer id){
-        return expenseService.getExpense(id);
+    @GetMapping("/getExpenseById")
+    public Expense getExpenseById(@RequestParam Integer id){
+        return expenseService.getExpenseById(id);
     }
 
     @PostMapping("/addExpenseIn")

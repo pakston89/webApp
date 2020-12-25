@@ -24,9 +24,14 @@ public class UserController {
         return userService.getUserOut(id);
     }
 
-    @GetMapping("/getUserByIdIn")
-    public User getUser(@RequestParam Integer id){
-        return userService.getUser(id);
+    @GetMapping("/getUserById")
+    public User getUserById(@RequestParam Integer id){
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/getUserByName")
+    public List<User> getUserByname(@RequestParam String name){
+        return userService.getUserByName(name);
     }
 
     @PostMapping("/addUserIn")
