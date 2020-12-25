@@ -23,7 +23,12 @@ public class ExpenseController {
     public Expense getExpenseById(@RequestParam Integer id){
         return expenseService.getExpenseById(id);
     }
-
+    
+    @GetMapping("/getExpenseByDescription")
+    public List<Expense> getExpenseByDescription(@RequestParam String description){
+      return expenseService.getExpenseByDescription(description);
+    }
+    
     @PostMapping("/addExpenseIn")
     public void addUser(@RequestBody Expense expense) throws JsonProcessingException {
         expenseService.addExpense(expense);

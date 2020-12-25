@@ -26,6 +26,10 @@ public class ExpenseService {
         }
     }
 
+    public List<Expense> getExpenseByDescription(String description){
+      return expenseRepository.findByDescription(description);
+    }
+
     public void addExpense(Expense expense) throws JsonProcessingException {
         Double amountInEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountInEuros);

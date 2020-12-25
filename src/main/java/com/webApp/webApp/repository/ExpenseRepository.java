@@ -7,7 +7,10 @@ import org.springframework.data.repository.query.Param;
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
     @Query(value = "SELECT * FROM expenses WHERE id=?1", nativeQuery = true)
-    Expense findByID(@Param("id") Integer Id);
+    Expense findByID(@Param("id") Integer id);
+    
+    @Query(value = "SELECT * FROM expenses WHERE description LIKE %?1%" nativeQuery = true)
+    List<Expense> findByDescription(@Param("description" String description);
 }
 
 
