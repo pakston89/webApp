@@ -30,7 +30,7 @@ public class ExpenseService {
       return expenseRepository.findByDescription(description);
     }
 
-    public void addExpense(Expense expense) throws JsonProcessingException {
+    public void addExpense(Expense expense){
         Double amountInEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountInEuros);
         expense.setCurrency("EUR");

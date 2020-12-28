@@ -30,7 +30,7 @@ public class ExpenseController {
     }
     
     @PostMapping("/addExpenseIn")
-    public void addUser(@RequestBody Expense expense) throws JsonProcessingException {
+    public void addUser(@RequestBody Expense expense){
         expenseService.addExpense(expense);
     }
 

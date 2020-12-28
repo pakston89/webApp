@@ -114,7 +114,7 @@ public class Expense {
         return rate;
     }
 
-    public Double convertAmountToEuros(Double amountToConvert, String fromCurrency) throws JsonProcessingException {
+    public Double convertAmountToEuros(Double amountToConvert, String fromCurrency){
         Double amountInEuros = amountToConvert / CurrencyExchangeResponseMapper(fromCurrency);
         Double amountInEurosRounded = Math.round(amountInEuros * 100.0) / 100.0;
         return amountInEurosRounded;
