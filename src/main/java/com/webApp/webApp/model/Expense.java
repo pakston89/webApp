@@ -18,6 +18,8 @@ public class Expense {
     private Integer id;
     @Column(name = "description")
     private String description;
+    @Column(name = "expense_type_id")
+    private Integer expenseTypeId;
     @Column(name = "amount")
     private double amount;
     @Column(name = "currency")
@@ -30,9 +32,10 @@ public class Expense {
 
     }
 
-    public Expense(Integer id, String description, double amount, String currency, User user) {
+    public Expense(Integer id, String description, Integer expenseTypeId, double amount, String currency, User user) {
         this.id = id;
         this.description = description;
+        this.expenseTypeId = expenseTypeId;
         this.amount = amount;
         this.currency = currency;
         this.user = user;
@@ -48,6 +51,14 @@ public class Expense {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getExpenseTypeId() {
+        return expenseTypeId;
+    }
+
+    public void setExpenseTypeId(Integer expenseTypeId) {
+        this.expenseTypeId = expenseTypeId;
     }
 
     public double getAmount() {
