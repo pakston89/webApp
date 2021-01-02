@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -14,6 +12,7 @@ public class UserService {
 
     @Autowired
     private RestTemplate restTemp;
+
     @Autowired
 	private UserRepository userRepository;
 
@@ -57,7 +56,7 @@ public class UserService {
 
     public void updateUser(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setName(user.getName());
+        userToUpdate.setName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setNif(user.getNif());
         userToUpdate.setRegistrationDate(user.getRegistrationDate());
@@ -66,7 +65,7 @@ public class UserService {
 
     public void updateUserName(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setName(user.getName());
+        userToUpdate.setName(user.getFirstName());
         userRepository.saveAndFlush(userToUpdate);
     }
 }
