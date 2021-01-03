@@ -1,5 +1,6 @@
 package com.webApp.webApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
@@ -23,12 +24,16 @@ public class User {
 	@Column(name = "registration_date")
 	private LocalDate registrationDate;
 	@Column(name = "user_name")
+	@JsonIgnore
 	private String userName;
 	@Column(name = "password")
+	@JsonIgnore
 	private String password;
 	@Column(name = "active")
+	@JsonIgnore
 	private Boolean active;
 	@Column(name = "roles")
+	@JsonIgnore
 	private String roles;
 
 	public User(){
