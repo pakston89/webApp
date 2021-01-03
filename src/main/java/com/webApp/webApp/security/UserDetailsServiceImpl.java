@@ -1,7 +1,6 @@
-package com.webApp.webApp.service;
+package com.webApp.webApp.security;
 
 import com.webApp.webApp.model.User;
-import com.webApp.webApp.model.UserDetailsImpl;
 import com.webApp.webApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
