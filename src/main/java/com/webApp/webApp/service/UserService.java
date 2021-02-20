@@ -56,7 +56,7 @@ public class UserService {
 
     public void updateUser(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setName(user.getFirstName());
+        userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setNif(user.getNif());
         userToUpdate.setRegistrationDate(user.getRegistrationDate());
@@ -65,7 +65,7 @@ public class UserService {
 
     public void updateUserName(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setName(user.getFirstName());
+        userToUpdate.setFirstName(user.getFirstName());
         userRepository.saveAndFlush(userToUpdate);
     }
 }

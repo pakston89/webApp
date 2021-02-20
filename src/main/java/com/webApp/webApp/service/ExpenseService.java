@@ -3,6 +3,7 @@ package com.webApp.webApp.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.repository.ExpenseRepository;
+import com.webApp.webApp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ExpenseService {
     }
 
     public void addExpense(Expense expense){
-        Double amountInEuros = expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
+        Double amountInEuros = Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountInEuros);
         expense.setCurrency("EUR");
         expenseRepository.save(expense);
@@ -45,7 +46,7 @@ public class ExpenseService {
     public void updateExpense(Expense expense) throws JsonProcessingException {
         Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
         expenseToUpdate.setDescription(expense.getDescription());
-        expenseToUpdate.setAmount(expense.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
+        expenseToUpdate.setAmount(Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
         expenseToUpdate.setUser(expense.getUser());
         expenseRepository.saveAndFlush(expenseToUpdate);
     }

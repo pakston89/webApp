@@ -1,14 +1,18 @@
 package com.webApp.webApp.model;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "expense_types")
+@Getter @Setter
 public class ExpenseType {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Setter(AccessLevel.NONE)
     private Integer id;
     @Column(name = "description")
     private String description;
@@ -19,18 +23,6 @@ public class ExpenseType {
 
     public ExpenseType(Integer id, String description) {
         this.id = id;
-        this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 }

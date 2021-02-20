@@ -18,37 +18,30 @@ public class UserController {
     public List<User> getUsers(){
         return userService.getUsers();
     }
-
     @GetMapping("/getUserByIdOut")
     public ResponseEntity<User> getUserOut(@RequestParam String id){
         return userService.getUserOut(id);
     }
-
     @GetMapping("/getUserById")
     public User getUserById(@RequestParam Integer id){
         return userService.getUserById(id);
     }
-
     @GetMapping("/getUserByName")
-    public List<User> getUserByname(@RequestParam String name){
+    public List<User> getUserByName(@RequestParam String name){
         return userService.getUserByName(name);
     }
-
     @PostMapping("/addUserIn")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
-
     @DeleteMapping("/deleteUserIn")
     public void deleteUser(@RequestParam Integer id) {
         userService.deleteUser(id);
     }
-
     @PutMapping("/updateUserIn")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
-
     @PatchMapping("/updateUserName")
     public void updateUserName(@RequestBody User user) {
         userService.updateUserName(user);

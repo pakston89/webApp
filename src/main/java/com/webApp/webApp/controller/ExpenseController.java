@@ -18,32 +18,26 @@ public class ExpenseController {
     public List<Expense> getExpenses(){
         return expenseService.getExpenses();
     }
-
     @GetMapping("/getExpenseById")
     public Expense getExpenseById(@RequestParam Integer id){
         return expenseService.getExpenseById(id);
     }
-    
     @GetMapping("/getExpenseByDescription")
     public List<Expense> getExpenseByDescription(@RequestParam String description){
       return expenseService.getExpenseByDescription(description);
     }
-    
     @PostMapping("/addExpenseIn")
     public void addUser(@RequestBody Expense expense){
         expenseService.addExpense(expense);
     }
-
     @DeleteMapping("/deleteExpenseIn")
     public void deleteExpense(@RequestParam Integer id) {
         expenseService.deleteExpense(id);
     }
-
     @PutMapping("/updateExpenseIn")
     public void updateExpense(@RequestBody Expense expense) throws JsonProcessingException {
         expenseService.updateExpense(expense);
     }
-
     @PatchMapping("/updateExpenseDescriptionIn")
     public void updateExpenseDescription(@RequestBody Expense expense) {
         expenseService.updateExpenseDescription(expense);
