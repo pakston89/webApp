@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.webApp</groupId>
 	<artifactId>webApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<name>webApp</name>
 	<description>Web application</description>
 	<properties>

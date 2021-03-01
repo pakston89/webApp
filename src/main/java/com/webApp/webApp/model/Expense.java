@@ -1,7 +1,6 @@
 package com.webApp.webApp.model;
 
 import javax.persistence.*;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
