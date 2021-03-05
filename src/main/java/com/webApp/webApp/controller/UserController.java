@@ -8,7 +8,6 @@ import com.webApp.webApp.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping
 public class UserController {
  
     @Autowired
