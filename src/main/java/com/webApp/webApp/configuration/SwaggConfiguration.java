@@ -11,8 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
-//Swagger sirve para testear nuestros servicios Rest
+@EnableSwagger2 //Swagger sirve para testear nuestros servicios Rest
 public class SwaggConfiguration {
 	
 	@Bean //Significa que cuando arranque esta configuración quedará fija para siempre

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 public class ExpenseController {
- 
+
     @Autowired
     ExpenseService expenseService;
 
