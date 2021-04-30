@@ -12,18 +12,18 @@ import java.util.List;
 public class ExpenseTypeController {
 
     @Autowired
-    ExpenseTypeService expenseTypeService;
+    private ExpenseTypeService expenseTypeServiceImpl;
 
     @GetMapping("/getExpenseTypes")
     public List<ExpenseType> getExpenses(){
-        return expenseTypeService.getExpenseTypes();
+        return expenseTypeServiceImpl.getExpenseTypes();
     }
     @GetMapping("/getExpenseTypeById")
     public ExpenseType getExpenseById(@RequestParam Integer id){
-        return expenseTypeService.getExpenseTypeById(id);
+        return expenseTypeServiceImpl.getExpenseTypeById(id);
     }
     @GetMapping("/getExpenseTypeByDescription")
     public List<ExpenseType> getExpenseTypeByDescription(@RequestParam String description){
-        return expenseTypeService.getExpenseTypeByDescription(description);
+        return expenseTypeServiceImpl.getExpenseTypeByDescription(description);
     }
 }

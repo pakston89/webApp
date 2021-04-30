@@ -1,48 +1,48 @@
 package com.webApp.webApp.controller;
 
+import com.webApp.webApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.webApp.webApp.model.User;
-import com.webApp.webApp.service.UserService;
 import java.util.List;
 
 @RestController
 public class UserController {
  
     @Autowired
-    UserService userService;
+    private UserService userServiceImpl;
 
     @GetMapping("/getUsers")
     public List<User> getUsers(){
-        return userService.getUsers();
+        return userServiceImpl.getUsers();
     }
     @GetMapping("/getUserByIdOut")
     public ResponseEntity<User> getUserOut(@RequestParam String id){
-        return userService.getUserOut(id);
+        return userServiceImpl.getUserOut(id);
     }
     @GetMapping("/getUserById")
     public User getUserById(@RequestParam Integer id){
-        return userService.getUserById(id);
+        return userServiceImpl.getUserById(id);
     }
     @GetMapping("/getUserByName")
     public List<User> getUserByName(@RequestParam String name){
-        return userService.getUserByName(name);
+        return userServiceImpl.getUserByName(name);
     }
     @PostMapping("/addUserIn")
     public void addUser(@RequestBody User user) {
-        userService.addUser(user);
+        userServiceImpl.addUser(user);
     }
     @DeleteMapping("/deleteUserIn")
     public void deleteUser(@RequestParam Integer id) {
-        userService.deleteUser(id);
+        userServiceImpl.deleteUser(id);
     }
     @PutMapping("/updateUserIn")
     public void updateUser(@RequestBody User user) {
-        userService.updateUser(user);
+        userServiceImpl.updateUser(user);
     }
     @PatchMapping("/updateUserName")
     public void updateUserName(@RequestBody User user) {
-        userService.updateUserName(user);
+        userServiceImpl.updateUserName(user);
     }
 }
