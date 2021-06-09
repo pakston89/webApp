@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class Utils {
+
     public static HttpResponse<String> RequestToCurrencyExchange(String fromCurrency){
         String url = String.format("http://data.fixer.io/api/latest?access_key=6eb751287d171bb40c9e732ded8c71c7&symbols=%s", fromCurrency);
         HttpResponse<String> response = null;

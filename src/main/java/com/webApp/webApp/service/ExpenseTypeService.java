@@ -1,7 +1,6 @@
 package com.webApp.webApp.service;
 
 import com.webApp.webApp.model.ExpenseType;
-
 import java.util.List;
 
 public interface ExpenseTypeService {
@@ -10,5 +9,5 @@ public interface ExpenseTypeService {
 
     public ExpenseType getExpenseTypeById(Integer id);
 
-    public List<ExpenseType> getExpenseTypeByDescription(String description);
+    public List<ExpenseType> getExpenseTypesByDescription(String description);
 }

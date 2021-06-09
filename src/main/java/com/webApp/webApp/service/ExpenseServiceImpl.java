@@ -1,6 +1,7 @@
 package com.webApp.webApp.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Strings;
 import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.repository.ExpenseRepository;
 import com.webApp.webApp.utils.Utils;
@@ -11,8 +12,12 @@ import java.util.List;
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 
-    @Autowired
 	private ExpenseRepository expenseRepository;
+
+	@Autowired
+    public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
+        this.expenseRepository = expenseRepository;
+    }
 
     @Override
     public List<Expense> getExpenses(){
@@ -51,16 +56,30 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void updateExpense(Expense expense) throws JsonProcessingException {
         Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
-        expenseToUpdate.setDescription(expense.getDescription());
-        expenseToUpdate.setAmount(Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
-        expenseToUpdate.setUser(expense.getUser());
+
+        if(!Strings.isNullOrEmpty(expense.getDescription())) {
+            expenseToUpdate.setDescription(expense.getDescription());
+        }
+
+        if(!expense.getAmount().isNaN()) {
+            expenseToUpdate.setAmount(Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
+        }
+
+        if(expense.getUser() != null) {
+            expenseToUpdate.setUser(expense.getUser());
+        }
+
         expenseRepository.saveAndFlush(expenseToUpdate);
     }
 
     @Override
     public void updateExpenseDescription(Expense expense) {
         Expense expenseToUpdate = expenseRepository.findByID(expense.getId());
-        expenseToUpdate.setDescription(expense.getDescription());
+
+        if(!Strings.isNullOrEmpty(expense.getDescription())) {
+            expenseToUpdate.setDescription(expense.getDescription());
+        }
+
         expenseRepository.saveAndFlush(expenseToUpdate);
     }
 }

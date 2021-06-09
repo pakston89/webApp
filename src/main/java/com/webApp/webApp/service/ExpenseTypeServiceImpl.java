@@ -9,8 +9,12 @@ import java.util.List;
 @Service
 public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 
-    @Autowired
     private ExpenseTypeRepository expenseTypeRepository;
+
+    @Autowired
+    public ExpenseTypeServiceImpl(ExpenseTypeRepository expenseTypeRepository) {
+        this.expenseTypeRepository = expenseTypeRepository;
+    }
 
     @Override
     public List<ExpenseType> getExpenseTypes(){
@@ -23,7 +27,7 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
     }
 
     @Override
-    public List<ExpenseType> getExpenseTypeByDescription(String description){
+    public List<ExpenseType> getExpenseTypesByDescription(String description){
         return expenseTypeRepository.findByDescription(description);
     }
 }

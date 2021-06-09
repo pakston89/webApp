@@ -1,39 +1,27 @@
 package com.webApp.webApp.service;
 
+import com.google.common.base.Strings;
 import com.webApp.webApp.repository.UserRepository;
 import com.webApp.webApp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private RestTemplate restTemp;
-
-    @Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> getUsers(){
         return userRepository.findAll();
-    }
-
-    @Override
-    public ResponseEntity<User> getUserOut(String id){
-        String url = String.format("http://localhost:5000/getUserByIdIn?userId=%s", id);
-        ResponseEntity<User> respuesta = null;
-        try{
-            respuesta = restTemp.getForEntity(url, User.class);
-            User user = respuesta.getBody();
-        }
-        catch(Exception e){
-
-        }
-        return respuesta;
     }
 
     @Override
@@ -47,12 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserByName(String name){
+    public List<User> getUsersByName(String name){
         return userRepository.findByName(name);
     }
 
     @Override
     public void addUser(User user) {
+	    user.setRegistrationDate(LocalDate.now());
         userRepository.save(user);
     }
 
@@ -65,17 +54,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setFirstName(user.getFirstName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setNif(user.getNif());
-        userToUpdate.setRegistrationDate(user.getRegistrationDate());
+
+        if(!Strings.isNullOrEmpty(user.getFirstName())) {
+            userToUpdate.setFirstName(user.getFirstName());
+        }
+
+        if(!Strings.isNullOrEmpty(user.getLastName())) {
+            userToUpdate.setLastName(user.getLastName());
+        }
+
+        if(!Strings.isNullOrEmpty(user.getNif())) {
+            userToUpdate.setNif(user.getNif());
+        }
+
+        if(user.getRegistrationDate() != null) {
+            userToUpdate.setRegistrationDate(user.getRegistrationDate());
+        }
+
         userRepository.saveAndFlush(userToUpdate);
     }
 
     @Override
-    public void updateUserName(User user) {
+    public void updateUserFirstName(User user) {
         User userToUpdate = userRepository.findByID(user.getId());
-        userToUpdate.setFirstName(user.getFirstName());
+
+        if(!Strings.isNullOrEmpty(user.getFirstName())) {
+            userToUpdate.setFirstName(user.getFirstName());
+        }
+
         userRepository.saveAndFlush(userToUpdate);
     }
 }

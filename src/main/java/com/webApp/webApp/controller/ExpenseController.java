@@ -1,45 +1,59 @@
 package com.webApp.webApp.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.webApp.webApp.model.Expense;
+import com.webApp.webApp.dto.ExpenseDto;
+import com.webApp.webApp.dto.mapper.ExpenseMapper;
 import com.webApp.webApp.service.ExpenseService;
-import com.webApp.webApp.service.ExpenseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/expense")
 public class ExpenseController {
 
-    @Autowired
     private ExpenseService expenseServiceImpl;
 
-    @GetMapping("/getExpenses")
-    public List<Expense> getExpenses(){
-        return expenseServiceImpl.getExpenses();
+    private ExpenseMapper expenseMapper;
+
+    @Autowired
+    public ExpenseController(ExpenseService expenseServiceImpl, ExpenseMapper expenseMapper) {
+        this.expenseServiceImpl = expenseServiceImpl;
+        this.expenseMapper = expenseMapper;
     }
-    @GetMapping("/getExpenseById")
-    public Expense getExpenseById(@RequestParam Integer id){
-        return expenseServiceImpl.getExpenseById(id);
+
+    @GetMapping("/getexpenses")
+    public List<ExpenseDto> getExpenses(){
+        return expenseMapper.expensesToExpensesDto(expenseServiceImpl.getExpenses());
     }
-    @GetMapping("/getExpenseByDescription")
-    public List<Expense> getExpenseByDescription(@RequestParam String description){
-      return expenseServiceImpl.getExpenseByDescription(description);
+
+    @GetMapping("/getexpensebyid")
+    public ExpenseDto getExpenseById(@RequestParam Integer id){
+        return expenseMapper.expenseToExpenseDto(expenseServiceImpl.getExpenseById(id));
     }
-    @PostMapping("/addExpenseIn")
-    public void addUser(@RequestBody Expense expense){
-        expenseServiceImpl.addExpense(expense);
+
+    @GetMapping("/getexpensesbydescription")
+    public List<ExpenseDto> getExpenseByDescription(@RequestParam String description){
+        return expenseMapper.expensesToExpensesDto(expenseServiceImpl.getExpenseByDescription(description));
     }
-    @DeleteMapping("/deleteExpenseIn")
+
+    @PostMapping("/addexpense")
+    public void addExpense(@RequestBody ExpenseDto expenseDto){
+        expenseServiceImpl.addExpense(expenseMapper.expenseDtoToExpense(expenseDto));
+    }
+
+    @DeleteMapping("/deleteexpense")
     public void deleteExpense(@RequestParam Integer id) {
         expenseServiceImpl.deleteExpense(id);
     }
-    @PutMapping("/updateExpenseIn")
-    public void updateExpense(@RequestBody Expense expense) throws JsonProcessingException {
-        expenseServiceImpl.updateExpense(expense);
+
+    @PutMapping("/updateexpense")
+    public void updateExpense(@RequestBody ExpenseDto expenseDto) throws JsonProcessingException {
+        expenseServiceImpl.updateExpense(expenseMapper.expenseDtoToExpense(expenseDto));
     }
-    @PatchMapping("/updateExpenseDescriptionIn")
-    public void updateExpenseDescription(@RequestBody Expense expense) {
-        expenseServiceImpl.updateExpenseDescription(expense);
+
+    @PatchMapping("/updateexpensedescription")
+    public void updateExpenseDescription(@RequestBody ExpenseDto expenseDto) {
+        expenseServiceImpl.updateExpenseDescription(expenseMapper.expenseDtoToExpense(expenseDto));
     }
 }

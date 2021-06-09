@@ -2,7 +2,6 @@ package com.webApp.webApp.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.webApp.webApp.model.Expense;
-
 import java.util.List;
 
 public interface ExpenseService {

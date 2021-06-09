@@ -1,7 +1,5 @@
 package com.webApp.webApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -11,31 +9,34 @@ import java.time.LocalDate;
 @Table(name ="users")
 @Getter @Setter
 public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	@Setter(AccessLevel.NONE)
 	private Integer id;
+
 	@Column(name = "first_name")
 	private String firstName;
+
 	@Column(name = "last_name")
 	private String lastName;
+
 	@Column(name = "nif")
 	private String nif;
+
 	@Column(name = "registration_date")
 	private LocalDate registrationDate;
+
 	@Column(name = "user_name")
-	@JsonIgnore
 	private String userName;
+
 	@Column(name = "password")
-	@JsonIgnore
 	private String password;
+
 	@Column(name = "active")
-	@JsonIgnore
 	private Boolean active;
+
 	@Column(name = "roles")
-	@JsonIgnore
-	@Setter(AccessLevel.NONE)
 	private String roles;
 
 	public User(){

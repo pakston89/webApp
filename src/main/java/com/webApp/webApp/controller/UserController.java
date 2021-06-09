@@ -1,48 +1,58 @@
 package com.webApp.webApp.controller;
 
+import com.webApp.webApp.dto.UserDto;
+import com.webApp.webApp.dto.mapper.UserMapper;
 import com.webApp.webApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.webApp.webApp.model.User;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
- 
-    @Autowired
+
     private UserService userServiceImpl;
 
-    @GetMapping("/getUsers")
-    public List<User> getUsers(){
-        return userServiceImpl.getUsers();
+    private UserMapper userMapper;
+
+    @Autowired
+    public UserController(UserService userServiceImpl, UserMapper userMapper) {
+        this.userServiceImpl = userServiceImpl;
+        this.userMapper = userMapper;
     }
-    @GetMapping("/getUserByIdOut")
-    public ResponseEntity<User> getUserOut(@RequestParam String id){
-        return userServiceImpl.getUserOut(id);
+
+    @GetMapping("/getusers")
+    public List<UserDto> getUsers(){
+        return userMapper.usersToUsersDto(userServiceImpl.getUsers());
     }
-    @GetMapping("/getUserById")
-    public User getUserById(@RequestParam Integer id){
-        return userServiceImpl.getUserById(id);
+
+    @GetMapping("/getuserbyid")
+    public UserDto getUserById(@RequestParam Integer id){
+        return userMapper.userToUserDto(userServiceImpl.getUserById(id));
     }
-    @GetMapping("/getUserByName")
-    public List<User> getUserByName(@RequestParam String name){
-        return userServiceImpl.getUserByName(name);
+
+    @GetMapping("/getusersbyname")
+    public List<UserDto> getUsersByName(@RequestParam String name){
+        return userMapper.usersToUsersDto(userServiceImpl.getUsersByName(name));
     }
-    @PostMapping("/addUserIn")
-    public void addUser(@RequestBody User user) {
-        userServiceImpl.addUser(user);
+
+    @PostMapping("/adduser")
+    public void addUser(@RequestBody UserDto userDto) {
+        userServiceImpl.addUser(userMapper.userDtoToUser(userDto));
     }
-    @DeleteMapping("/deleteUserIn")
+
+    @DeleteMapping("/deleteuser")
     public void deleteUser(@RequestParam Integer id) {
         userServiceImpl.deleteUser(id);
     }
-    @PutMapping("/updateUserIn")
-    public void updateUser(@RequestBody User user) {
-        userServiceImpl.updateUser(user);
+
+    @PatchMapping("/updateuser")
+    public void updateUser(@RequestBody UserDto userDto) {
+        userServiceImpl.updateUser(userMapper.userDtoToUser(userDto));
     }
-    @PatchMapping("/updateUserName")
-    public void updateUserName(@RequestBody User user) {
-        userServiceImpl.updateUserName(user);
+
+    @PatchMapping("/updateusername")
+    public void updateUserFirstName(@RequestBody UserDto userDto) {
+        userServiceImpl.updateUserFirstName(userMapper.userDtoToUser(userDto));
     }
 }

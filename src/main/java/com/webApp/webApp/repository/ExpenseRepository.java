@@ -9,6 +9,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
     @Query(value = "SELECT * FROM expenses WHERE id=?1", nativeQuery = true)
     Expense findByID(Integer id);
+
     @Query(value = "SELECT * FROM expenses WHERE description LIKE %?1%", nativeQuery = true)
     List<Expense> findByDescription(String description);
 }

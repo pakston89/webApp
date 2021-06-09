@@ -1,6 +1,5 @@
 package com.webApp.webApp.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -9,11 +8,12 @@ import javax.persistence.*;
 @Table(name = "expense_types")
 @Getter @Setter
 public class ExpenseType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @Setter(AccessLevel.NONE)
     private Integer id;
+
     @Column(name = "description")
     private String description;
 
