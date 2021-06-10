@@ -61,12 +61,16 @@ public class ExpenseServiceImpl implements ExpenseService {
             expenseToUpdate.setDescription(expense.getDescription());
         }
 
-        if(!expense.getAmount().isNaN()) {
+        if(expense.getAmount() != null) {
             expenseToUpdate.setAmount(Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
         }
 
-        if(expense.getUser() != null) {
-            expenseToUpdate.setUser(expense.getUser());
+        if(expense.getExpenseTypeId() != null) {
+            expenseToUpdate.setExpenseTypeId(expense.getExpenseTypeId());
+        }
+
+        if(expense.getUserId() != null) {
+            expenseToUpdate.setUserId(expense.getUserId());
         }
 
         expenseRepository.saveAndFlush(expenseToUpdate);

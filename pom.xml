@@ -11,7 +11,7 @@
 
 	<groupId>com.webApp</groupId>
 	<artifactId>webApp</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.9</version>
 	<name>webApp</name>
 	<description>Web application</description>
 
@@ -58,11 +58,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-    	<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>

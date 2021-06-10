@@ -20,7 +20,5 @@ public class ExpenseDto {
 
     private String currency;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    private User user;
+    private Integer userId;
 }

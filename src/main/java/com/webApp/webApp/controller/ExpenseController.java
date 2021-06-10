@@ -47,7 +47,7 @@ public class ExpenseController {
         expenseServiceImpl.deleteExpense(id);
     }
 
-    @PutMapping("/updateexpense")
+    @PatchMapping("/updateexpense")
     public void updateExpense(@RequestBody ExpenseDto expenseDto) throws JsonProcessingException {
         expenseServiceImpl.updateExpense(expenseMapper.expenseDtoToExpense(expenseDto));
     }

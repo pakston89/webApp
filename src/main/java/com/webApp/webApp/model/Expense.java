@@ -25,21 +25,20 @@ public class Expense {
 
     @Column(name = "currency")
     private String currency;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @Column(name = "user_id")
+    private Integer userId;
 
     public Expense() {
 
     }
 
-    public Expense(Integer id, String description, Integer expenseTypeId, Double amount, String currency, User user) {
+    public Expense(Integer id, String description, Integer expenseTypeId, Double amount, String currency, Integer userId) {
         this.id = id;
         this.description = description;
         this.expenseTypeId = expenseTypeId;
         this.amount = amount;
         this.currency = currency;
-        this.user = user;
+        this.userId = userId;
     }
 }
