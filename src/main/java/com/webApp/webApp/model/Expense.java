@@ -3,10 +3,12 @@ package com.webApp.webApp.model;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "expenses")
 @Getter @Setter
+@ToString
 public class Expense {
 
     @Id

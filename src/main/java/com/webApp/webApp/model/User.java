@@ -2,12 +2,14 @@ package com.webApp.webApp.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name ="users")
 @Getter @Setter
+@ToString
 public class User {
 
 	@Id
@@ -39,7 +41,7 @@ public class User {
 	@Column(name = "roles")
 	private String roles;
 
-	public User(){
+	public User() {
 
 	}
 

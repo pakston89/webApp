@@ -5,6 +5,7 @@ import com.webApp.webApp.model.ExpenseType;
 import org.mapstruct.Mapper;
 import java.util.List;
 
+//ComponentModel = "spring" produce un bean para poderlo inyectar donde queramos.
 @Mapper(componentModel = "spring")
 public interface ExpenseTypeMapper {
 
