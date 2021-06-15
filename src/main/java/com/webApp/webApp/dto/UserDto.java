@@ -15,4 +15,6 @@ public class UserDto {
     private String lastName;
 
     private String nif;
+
+    private String cardNumber;
 }

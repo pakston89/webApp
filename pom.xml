@@ -11,7 +11,7 @@
 
 	<groupId>com.webApp</groupId>
 	<artifactId>webApp</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.2</version>
 	<name>webApp</name>
 	<description>Web application</description>
 
@@ -87,6 +87,7 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -96,6 +97,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -130,4 +132,5 @@
             </plugin>
         </plugins>
 	</build>
+
 </project>

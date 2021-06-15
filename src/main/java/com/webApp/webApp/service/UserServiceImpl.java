@@ -3,6 +3,7 @@ package com.webApp.webApp.service;
 import com.google.common.base.Strings;
 import com.webApp.webApp.repository.UserRepository;
 import com.webApp.webApp.model.User;
+import com.webApp.webApp.security.Cipher.AES256;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
 	    user.setRegistrationDate(LocalDate.now());
+        String secretKey = AES256.getRandomKey();
+        String salt = AES256.getRandomKey();
+	    user.setCardNumber(AES256.encrypt(user.getCardNumber(), secretKey, salt));
+        user.setSecretKey(secretKey);
+        user.setSalt(salt);
         userRepository.save(user);
     }
 
@@ -64,6 +70,14 @@ public class UserServiceImpl implements UserService {
 
         if(!Strings.isNullOrEmpty(user.getNif())) {
             userToUpdate.setNif(user.getNif());
+        }
+
+        if(!Strings.isNullOrEmpty(user.getCardNumber())) {
+            String secretKey = AES256.getRandomKey();
+            String salt = AES256.getRandomKey();
+            userToUpdate.setCardNumber(AES256.encrypt(user.getCardNumber(), secretKey, salt));
+            userToUpdate.setSecretKey(secretKey);
+            userToUpdate.setSalt(salt);
         }
 
         if(user.getRegistrationDate() != null) {

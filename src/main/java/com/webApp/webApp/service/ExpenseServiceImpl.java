@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Strings;
 import com.webApp.webApp.model.Expense;
 import com.webApp.webApp.repository.ExpenseRepository;
-import com.webApp.webApp.utils.Utils;
+import com.webApp.webApp.utils.CurrencyConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void addExpense(Expense expense){
-        Double amountInEuros = Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
+        Double amountInEuros = CurrencyConversion.convertAmountToEuros(expense.getAmount(), expense.getCurrency());
         expense.setAmount(amountInEuros);
         expense.setCurrency("EUR");
         expenseRepository.save(expense);
@@ -62,7 +62,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
 
         if(expense.getAmount() != null) {
-            expenseToUpdate.setAmount(Utils.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
+            expenseToUpdate.setAmount(CurrencyConversion.convertAmountToEuros(expense.getAmount(), expense.getCurrency()));
         }
 
         if(expense.getExpenseTypeId() != null) {

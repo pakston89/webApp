@@ -1,13 +1,12 @@
 package com.webApp.webApp.exception;
 
-import com.webApp.webApp.controller.ExpenseController;
 import com.webApp.webApp.utils.LogConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(assignableTypes = ExpenseController.class)
+@RestControllerAdvice(basePackages = "controller")
 public class RestControllerExceptionHandler {
 
     @ExceptionHandler

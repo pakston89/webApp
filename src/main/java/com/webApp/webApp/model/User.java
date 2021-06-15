@@ -26,6 +26,15 @@ public class User {
 	@Column(name = "nif")
 	private String nif;
 
+	@Column(name = "card_number")
+	private String cardNumber;
+
+	@Column(name = "secret_key")
+	private String secretKey;
+
+	@Column(name = "salt")
+	private String salt;
+
 	@Column(name = "registration_date")
 	private LocalDate registrationDate;
 
@@ -45,11 +54,12 @@ public class User {
 
 	}
 
-	public User(Integer id, String firstName, String lastName, String nif, LocalDate registrationDate, String userName, String password, Boolean active, String roles) {
+	public User(Integer id, String firstName, String lastName, String nif, String cardNumber, LocalDate registrationDate, String userName, String password, Boolean active, String roles) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nif = nif;
+		this.cardNumber = cardNumber;
 		this.registrationDate = registrationDate;
 		this.userName = userName;
 		this.password = password;
