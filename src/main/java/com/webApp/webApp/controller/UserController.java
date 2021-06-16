@@ -40,6 +40,12 @@ public class UserController {
         return userMapper.usersToUsersDto(userServiceImpl.getUsersByName(name));
     }
 
+    @GetMapping("/getcardnumberbyuserid")
+    public String getCardNumberByUserId(@RequestParam Integer id){
+        LogConstants.UserControllerLOG.info("Method: getCardNumberByUserId -- Params: " + id);
+        return userServiceImpl.getCardNumberByUserId(id);
+    }
+
     @PostMapping("/adduser")
     public void addUser(@RequestBody UserDto userDto) {
         LogConstants.UserControllerLOG.info("Method: addUser -- Params: " + userDto.toString());

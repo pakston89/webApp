@@ -9,6 +9,8 @@ public interface UserService {
 
     public User getUserById(Integer id);
 
+    public String getCardNumberByUserId(Integer id);
+
     public List<User> getUsersByName(String name);
 
     public void addUser(User user);

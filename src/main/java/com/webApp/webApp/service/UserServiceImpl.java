@@ -26,12 +26,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Integer id){
-        if (id > 0){
-            return userRepository.findByID(id);
-        }
-        else{
-            return null;
-        }
+	    return userRepository.findByID(id);
+    }
+
+    @Override
+    public String getCardNumberByUserId(Integer id) {
+	    User user = userRepository.findByID(id);
+        return AES256.decrypt(user.getCardNumber(), user.getSecretKey(), user.getSalt());
     }
 
     @Override
