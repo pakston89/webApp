@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getCardNumberByUserId(Integer id) {
+    public String getDecryptedCardNumberByUserId(Integer id) {
 	    User user = userRepository.findByID(id);
         return AES256.decrypt(user.getCardNumber(), user.getSecretKey(), user.getSalt());
     }

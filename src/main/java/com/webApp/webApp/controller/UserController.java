@@ -40,10 +40,10 @@ public class UserController {
         return userMapper.usersToUsersDto(userServiceImpl.getUsersByName(name));
     }
 
-    @GetMapping("/getcardnumberbyuserid")
-    public String getCardNumberByUserId(@RequestParam Integer id){
-        LogConstants.UserControllerLOG.info("Method: getCardNumberByUserId -- Params: " + id);
-        return userServiceImpl.getCardNumberByUserId(id);
+    @GetMapping("/getdecryptedcardnumberbyuserid")
+    public String getDecryptedCardNumberByUserId(@RequestParam Integer id){
+        LogConstants.UserControllerLOG.info("Method: getDecryptedCardNumberByUserId -- Params: " + id);
+        return userServiceImpl.getDecryptedCardNumberByUserId(id);
     }
 
     @PostMapping("/adduser")
